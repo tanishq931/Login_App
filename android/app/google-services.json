@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "410894351812",
+    "project_id": "test-3ad10",
+    "storage_bucket": "test-3ad10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410894351812:android:63f503ad74099a4416b891",
+        "android_client_info": {
+          "package_name": "com.tsagames.login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410894351812-us4agd6ce85vh2jt4on42kvp25aspsro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEYGquylqxoT2sRyjWxPF-MeoKRdNlM2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410894351812-us4agd6ce85vh2jt4on42kvp25aspsro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
