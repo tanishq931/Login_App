@@ -44,6 +44,7 @@ class _LoginwithphoneState extends State<Loginwithphone> {
                   children: [
                     TextFormField(
                       controller: phone,
+                      keyboardType: TextInputType.phone,
                       decoration: const InputDecoration(
                         hintText: "+91 9000000000",
                         prefixIcon: Icon(Icons.phone),
@@ -106,9 +107,12 @@ class _LoginwithphoneState extends State<Loginwithphone> {
                         });
                       },
 
-                          phoneNumber:phone.text.toString(),
+                          phoneNumber:"${code+phone.text.toString()}",
 
                           verificationFailed: (e) {
+                            setState(() {
+                              loading=false;
+                            });
                             Utils().toastmsg(e.toString());
 
                           },
