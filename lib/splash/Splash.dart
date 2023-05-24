@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_app/auth/login.dart';
 import 'package:login_app/auth/logincheck.dart';
+import 'package:login_app/database/PostData.dart';
+import 'package:login_app/database/ShowData.dart';
 import 'package:login_app/mainfiles/post.dart';
 import 'package:login_app/textstyles/textstyle1.dart';
 
@@ -25,7 +27,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     Timer(Duration(seconds: 3),(){
       Logcheck().isLogin(context)?
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Images()))
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ShowDB()))
       :
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Login()));
     });

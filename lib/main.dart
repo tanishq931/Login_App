@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:login_app/auth/LoginWithPhone.dart';
+import 'package:login_app/database/PostData.dart';
+import 'package:login_app/database/ShowData.dart';
 import 'package:login_app/mainfiles/post.dart';
 import 'package:login_app/splash/Splash.dart';
 
@@ -28,28 +30,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
 
       ),
-      home: Loginwithphone(),
+      home: Splash(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-class _MyHomePageState extends State<MyHomePage> {
 
-  @override
-  Widget build(BuildContext context) {
 
-    return Scaffold(
-      appBar: AppBar(
-
-        title: Text(widget.title),
-      ),
-
-    );
-  }
-}

@@ -7,6 +7,7 @@ import 'package:login_app/auth/LoginWithPhone.dart';
 import 'package:login_app/auth/signup.dart';
 import 'package:login_app/auth/textfield.dart';
 import 'package:login_app/buttons/roundbutton.dart';
+import 'package:login_app/database/ShowData.dart';
 import 'package:login_app/mainfiles/post.dart';
 import 'package:login_app/textstyles/textstyle1.dart';
 import 'package:login_app/utils/utils.dart';
@@ -21,6 +22,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool loading= false;
+  var logout=false;
   FirebaseAuth auth = FirebaseAuth.instance;
   var key = GlobalKey<FormState>();
   var email = TextEditingController();
@@ -87,7 +89,7 @@ class _LoginState extends State<Login> {
         ],),
       ),
             InkWell(child: roundbutton(text: "Login with Phone"),onTap: (){
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context)=>Loginwithphone()));
             },)
      ],),)
@@ -100,12 +102,27 @@ class _LoginState extends State<Login> {
       loading=true;
       auth.signInWithEmailAndPassword(email: email.text,
           password: pass.text)
-          .then((value) {
+          .then((value) async {
+        final snackbar = SnackBar(content: Text('Successfull Login'),
+          action: SnackBarAction(
+            label: 'Logout',
+            onPressed: (){
+              setState(() {
+              auth.signOut();
+               logout=true;
 
+              });
+
+            },
+
+          ),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackbar);
        loading=false;
-        Utils().toastmsg("Successfully Signed In");
+
+      if(logout==false){await Future.delayed(Duration(seconds: 5));
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => Images()));})
+            MaterialPageRoute(builder: (context) => ShowDB()));}})
           .onError((error, stackTrace) {
         loading=false;
         Utils().toastmsg(error.toString());});

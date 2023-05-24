@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_app/buttons/roundbutton.dart';
+import 'package:login_app/database/ShowData.dart';
 import 'package:login_app/mainfiles/post.dart';
 import 'package:login_app/utils/utils.dart';
 
@@ -17,6 +18,7 @@ class Loginwithphone extends StatefulWidget {
 class _LoginwithphoneState extends State<Loginwithphone> {
   String verify = "";
   int? id;
+  String code="+91";
   bool loading = false,sent=false;
   var key = GlobalKey<FormState>();
   var auth = FirebaseAuth.instance;
@@ -25,6 +27,7 @@ class _LoginwithphoneState extends State<Loginwithphone> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Color(0xff1CB5E0),
       appBar: AppBar(
@@ -72,12 +75,17 @@ class _LoginwithphoneState extends State<Loginwithphone> {
                   onTap:(){
                     final credential = PhoneAuthProvider.credential(
                         verificationId: verify,
-                        smsCode: id.toString()
+                        smsCode: otp.text.toString(),
                     );
                     try{
-                      auth.signInWithCredential(credential);
-                      Utils().toastmsg('Signed In');
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Images()));
+                      auth.signInWithCredential(credential)
+                          .then((value){
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context)=> ShowDB()));
+                          }).onError((error, stackTrace) {
+                            Utils().toastmsg('otp galat he');});
+
+
                     }catch(e){
                       Utils().toastmsg(e.toString());
 
@@ -98,13 +106,13 @@ class _LoginwithphoneState extends State<Loginwithphone> {
                         });
                       },
 
-                          phoneNumber: phone.text,
+                          phoneNumber:phone.text.toString(),
+
                           verificationFailed: (e) {
                             Utils().toastmsg(e.toString());
 
                           },
-                          codeSent: (String verification, int ? id) {
-
+                          codeSent: (String verificationId,int? token) {
                             setState(() {
                               sent=true;
                             });
@@ -112,8 +120,8 @@ class _LoginwithphoneState extends State<Loginwithphone> {
                             setState(() {
                               loading=false;
                             });
-                            verify = verification;
-                            id = id;
+                            verify = verificationId;
+
 
                           },
                           codeAutoRetrievalTimeout: (e) {
