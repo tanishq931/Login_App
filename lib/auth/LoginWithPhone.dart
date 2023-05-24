@@ -107,7 +107,7 @@ class _LoginwithphoneState extends State<Loginwithphone> {
                         });
                       },
 
-                          phoneNumber:"${code+phone.text.toString()}",
+                          phoneNumber:"$code ${phone.text.toString()}",
 
                           verificationFailed: (e) {
                             setState(() {
