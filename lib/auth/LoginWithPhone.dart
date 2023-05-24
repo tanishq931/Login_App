@@ -46,8 +46,9 @@ class _LoginwithphoneState extends State<Loginwithphone> {
                       controller: phone,
                       keyboardType: TextInputType.phone,
                       decoration: const InputDecoration(
-                        hintText: "+91 9000000000",
+                        hintText: "9000000000",
                         prefixIcon: Icon(Icons.phone),
+
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -71,7 +72,7 @@ class _LoginwithphoneState extends State<Loginwithphone> {
             ),
             SizedBox(height: 30,),
             Container(
-              child: sent? InkWell(
+              child: sent?InkWell(
                   child:roundbutton(text: 'Login', loading: loading),
                   onTap:(){
                     final credential = PhoneAuthProvider.credential(
